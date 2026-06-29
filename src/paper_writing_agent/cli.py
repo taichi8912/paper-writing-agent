@@ -23,6 +23,16 @@ import sys
 from collections.abc import Sequence
 
 from . import __version__
+from .bibindex import (
+    apply_grounding,
+    build_index,
+    extract_usage,
+    load_index,
+    merge_index,
+    parse_bibtex,
+    save_index,
+    validate_index,
+)
 from .config import CONFIG_FILENAME, PRESET_NAMES, Config, load_config, run_wizard
 from .slop import format_json, format_text, has_errors, lint_paths
 
@@ -90,6 +100,75 @@ def _cmd_stub(name: str, phase: str) -> int:
 
 
 # --------------------------------------------------------------------------- #
+# bib
+# --------------------------------------------------------------------------- #
+def _require_subcommand(parser: argparse.ArgumentParser) -> int:
+    parser.print_help()
+    return 1
+
+
+def _default_index_path(bib_path: str) -> str:
+    directory = os.path.dirname(os.path.abspath(bib_path))
+    return os.path.join(directory, "bib_index.yaml")
+
+
+def _cmd_bib_build(args: argparse.Namespace) -> int:
+    with open(args.bib_file, encoding="utf-8") as handle:
+        entries = parse_bibtex(handle.read())
+    fresh = build_index(entries, source_bib=os.path.basename(args.bib_file))
+
+    output = args.output or _default_index_path(args.bib_file)
+    index = fresh
+    if args.update and os.path.isfile(output):
+        index = merge_index(load_index(output), fresh)
+
+    meta = index["metadata"]
+    _echo(f"Parsed {meta['total_entries']} entries, {meta['unique_keys']} unique keys.")
+    if meta["duplicate_keys"]:
+        _echo(f"Duplicate keys: {', '.join(meta['duplicate_keys'])}")
+    top = sorted(index["topics"].items(), key=lambda kv: (-len(kv[1]), kv[0]))[:5]
+    if top:
+        _echo("Top topics: " + ", ".join(f"{tag} ({len(ids)})" for tag, ids in top))
+    missing = sum(1 for e in index["entries"] if not e.get("doi") and not e.get("url"))
+    if missing:
+        _echo(f"Entries with no DOI or URL: {missing}")
+
+    if args.dry_run:
+        _echo("Dry run: no file written.")
+        return 0
+    save_index(output, index)
+    _echo(f"Wrote {output}")
+    return 0
+
+
+def _cmd_bib_validate(args: argparse.Namespace) -> int:
+    index = load_index(args.index_file)
+    bib_keys = None
+    if args.bib:
+        with open(args.bib, encoding="utf-8") as handle:
+            bib_keys = [entry.key for entry in parse_bibtex(handle.read())]
+    report = validate_index(index, bib_keys=bib_keys, strict=args.strict)
+    _echo(report.render())
+    return 0 if report.ok else 1
+
+
+def _cmd_bib_ground(args: argparse.Namespace) -> int:
+    index = load_index(args.index_file)
+    combined = []
+    for source in args.source:
+        with open(source, encoding="utf-8") as handle:
+            combined.append(handle.read())
+    usage = extract_usage("\n".join(combined))
+    grounded = apply_grounding(index, usage, mark_verified=not args.no_verified)
+
+    output = args.output or args.index_file
+    save_index(output, index)
+    _echo(f"Grounded {grounded} entr(y/ies) from {len(args.source)} source file(s).")
+    _echo(f"Wrote {output}")
+    return 0
+
+
+# --------------------------------------------------------------------------- #
 # parser
 # --------------------------------------------------------------------------- #
 def build_parser() -> argparse.ArgumentParser:
@@ -121,8 +200,33 @@ def build_parser() -> argparse.ArgumentParser:
     p_lint.add_argument("--config", default=None, help="path to a config file")
     p_lint.set_defaults(func=_cmd_lint)
 
+    p_bib = sub.add_parser("bib", help="build / validate / ground a bibliography context index")
+    bib_sub = p_bib.add_subparsers(dest="bib_command", metavar="<action>")
+
+    b_build = bib_sub.add_parser("build", help="build a context index from a .bib file")
+    b_build.add_argument("bib_file", help="path to a BibTeX file")
+    b_build.add_argument("--output", default=None, help="output index path (YAML)")
+    b_build.add_argument("--update", action="store_true", help="merge into an existing index")
+    b_build.add_argument("--dry-run", action="store_true", help="report stats; write nothing")
+    b_build.set_defaults(func=_cmd_bib_build)
+
+    b_validate = bib_sub.add_parser("validate", help="validate an index against the schema/gates")
+    b_validate.add_argument("index_file", help="path to a context index (YAML)")
+    b_validate.add_argument("--bib", default=None, help="source .bib for coverage checking")
+    b_validate.add_argument("--strict", action="store_true", help="treat needs_review as an error")
+    b_validate.set_defaults(func=_cmd_bib_validate)
+
+    b_ground = bib_sub.add_parser("ground", help="attach real citation usage from a prior paper")
+    b_ground.add_argument("index_file", help="path to a context index (YAML)")
+    b_ground.add_argument("--from", dest="source", nargs="+", required=True, help="prior .tex files")
+    b_ground.add_argument("--output", default=None, help="output path (default: in place)")
+    b_ground.add_argument(
+        "--no-verified", action="store_true", help="do not mark grounded entries verified"
+    )
+    b_ground.set_defaults(func=_cmd_bib_ground)
+    p_bib.set_defaults(func=lambda a: _require_subcommand(p_bib))
+
     for name, phase, helptext in (
-        ("bib", "P3", "build / validate a bibliography context index"),
         ("stats", "P4", "run the statistical-honesty linter"),
         ("sections", "P4", "show / update the section-status tracker"),
         ("defs", "P4", "check the symbol/abbreviation registry"),

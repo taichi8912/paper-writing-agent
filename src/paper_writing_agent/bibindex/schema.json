@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "paper-writing-agent bibliography context index",
+  "type": "object",
+  "required": ["metadata", "entries"],
+  "additionalProperties": false,
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["source_bib", "total_entries", "unique_keys", "generator"],
+      "additionalProperties": true,
+      "properties": {
+        "source_bib": { "type": "string" },
+        "total_entries": { "type": "integer", "minimum": 0 },
+        "unique_keys": { "type": "integer", "minimum": 0 },
+        "duplicate_keys": { "type": "array", "items": { "type": "string" } },
+        "generator": { "type": "string" }
+      }
+    },
+    "topics": {
+      "type": "object",
+      "additionalProperties": { "type": "array", "items": { "type": "string" } }
+    },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "required": [
+        "id",
+        "entry_type",
+        "title",
+        "year",
+        "topics",
+        "citation_role",
+        "available_from_section",
+        "key_findings",
+        "suitable_contexts",
+        "sample_phrases",
+        "curation_status",
+        "cite_as"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "entry_type": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "authors_short": { "type": "array", "items": { "type": "string" } },
+        "year": { "type": "string" },
+        "venue": { "type": "string" },
+        "doi": { "type": ["string", "null"] },
+        "url": { "type": ["string", "null"] },
+        "topics": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "citation_role": {
+          "type": "string",
+          "enum": [
+            "prior_work",
+            "baseline",
+            "dataset",
+            "method",
+            "theory",
+            "tool",
+            "survey",
+            "background",
+            "other"
+          ]
+        },
+        "available_from_section": {
+          "type": "string",
+          "enum": ["any", "introduction", "results", "discussion", "methods"]
+        },
+        "key_findings": { "type": "string", "minLength": 1 },
+        "suitable_contexts": { "type": "array", "items": { "type": "string" } },
+        "sample_phrases": { "type": "array", "items": { "type": "string" } },
+        "author_usage": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["section", "sentence"],
+            "additionalProperties": false,
+            "properties": {
+              "section": { "type": "string" },
+              "sentence": { "type": "string" }
+            }
+          }
+        },
+        "curation_status": {
+          "type": "string",
+          "enum": ["verified", "derived", "needs_review"]
+        },
+        "cite_as": { "type": "string", "pattern": "^\\\\cite\\{[^}]+\\}$" }
+      }
+    }
+  }
+}
