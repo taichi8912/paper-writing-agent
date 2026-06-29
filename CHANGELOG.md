@@ -25,7 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Manuscript-workspace scaffolding emitted by `pwa init`.
 - Claude Code plugin: skills, commands, agents, and a knowledge base (operating
   principles, journal-agnostic style guide, templates).
-- Trilingual README (English, 中文, 日本語), tests for every module, and a
+- Design-philosophy slide deck (`docs/slides/`, native editable PPTX + PDF).
+- Trilingual README (English, 中文, 日本語) at the repository root, tests for
+  every module, and a
   development base structure that dogfoods the anti-slop linter in pre-commit and
   CI (single-source-of-truth layout, reproducible tooling, semantic versioning).
 

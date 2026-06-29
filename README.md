@@ -41,6 +41,13 @@ In short, eight pillars:
 Objective: maximize acceptance at a high-impact venue. Quality hierarchy:
 **Accuracy > Clarity > Conciseness > Professionalism.**
 
+## Slides
+
+A nine-slide deck on the motivation and technical core lives in
+[docs/slides/](docs/slides/):
+[PDF](docs/slides/design-philosophy.pdf) ·
+[PPTX](docs/slides/design-philosophy.pptx) (native, editable).
+
 ## Install
 
 ```bash

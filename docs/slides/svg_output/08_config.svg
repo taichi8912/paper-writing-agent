@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="DejaVu Sans, Arial, sans-serif">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="14" height="720" fill="#2563EB"/>
+  <text x="100" y="92" font-size="38" font-weight="bold" fill="#0F172A">Configurable, not rigid</text>
+  <rect x="100" y="112" width="1080" height="2" fill="#E2E8F0"/>
+  <text x="100" y="150" font-size="21" fill="#64748B">An interactive wizard and three presets. Sensible defaults; everything overridable.</text>
+
+  <text x="100" y="194" font-size="20" fill="#1E40AF" font-weight="bold">pwa init</text>
+  <rect x="230" y="174" width="240" height="40" rx="8" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1.5"/>
+  <text x="350" y="201" font-size="18" fill="#1E40AF" text-anchor="middle">strict-high-IF</text>
+  <rect x="486" y="174" width="200" height="40" rx="8" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.5"/>
+  <text x="586" y="201" font-size="18" fill="#1E40AF" text-anchor="middle">balanced</text>
+  <rect x="702" y="174" width="200" height="40" rx="8" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.5"/>
+  <text x="802" y="201" font-size="18" fill="#1E40AF" text-anchor="middle">lenient</text>
+
+  <!-- left: configurable -->
+  <rect x="100" y="240" width="520" height="400" rx="12" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.5"/>
+  <text x="128" y="284" font-size="24" font-weight="bold" fill="#1E40AF">You configure</text>
+  <text x="128" y="328" font-size="19" fill="#334155">Target field and venue tier</text>
+  <text x="128" y="360" font-size="19" fill="#334155">Citation style (numeric / author-year)</text>
+  <text x="128" y="392" font-size="19" fill="#334155">Spelling (US / UK)</text>
+  <text x="128" y="424" font-size="19" fill="#334155">P-value notation and significant figures</text>
+  <text x="128" y="456" font-size="19" fill="#334155">Section structure and figure references</text>
+  <text x="128" y="488" font-size="19" fill="#334155">Hedging strictness</text>
+  <text x="128" y="520" font-size="19" fill="#334155">Operating language (en / zh / ja)</text>
+  <text x="128" y="552" font-size="19" fill="#334155">Project-local forbidden-word extensions</text>
+
+  <!-- right: invariants -->
+  <rect x="660" y="240" width="520" height="400" rx="12" fill="#0F172A"/>
+  <text x="688" y="284" font-size="24" font-weight="bold" fill="#93C5FD">Always on</text>
+  <text x="688" y="328" font-size="19" fill="#E2E8F0">Significance needs a test and a verdict</text>
+  <text x="688" y="368" font-size="19" fill="#E2E8F0">Citations are never fabricated</text>
+  <text x="688" y="408" font-size="19" fill="#E2E8F0">No speculative edits to unread files</text>
+  <text x="688" y="448" font-size="19" fill="#E2E8F0">The user holds decision authority</text>
+  <text x="688" y="488" font-size="19" fill="#E2E8F0">Accuracy is never demoted</text>
+  <rect x="688" y="528" width="464" height="2" fill="#334155"/>
+  <text x="688" y="568" font-size="18" fill="#94A3B8">Friendly out of the box; never a</text>
+  <text x="688" y="592" font-size="18" fill="#94A3B8">straitjacket.</text>
+
+  <text x="100" y="692" font-size="16" fill="#94A3B8">github.com/taichi8912/paper-writing-agent</text>
+  <text x="1180" y="692" font-size="16" fill="#94A3B8" text-anchor="end">8 / 9</text>
+</svg>

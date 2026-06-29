@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="DejaVu Sans, Arial, sans-serif">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="14" height="720" fill="#2563EB"/>
+  <text x="100" y="92" font-size="38" font-weight="bold" fill="#0F172A">Get started</text>
+  <rect x="100" y="112" width="1080" height="2" fill="#E2E8F0"/>
+
+  <rect x="100" y="160" width="1080" height="250" rx="12" fill="#0F172A"/>
+  <text x="132" y="210" font-size="24" fill="#22C55E" font-family="DejaVu Sans Mono, monospace">$ pip install paper-writing-agent</text>
+  <text x="132" y="266" font-size="24" fill="#E2E8F0" font-family="DejaVu Sans Mono, monospace">$ pwa init my-paper/</text>
+  <text x="132" y="322" font-size="24" fill="#E2E8F0" font-family="DejaVu Sans Mono, monospace">$ pwa check my-paper/</text>
+  <text x="132" y="372" font-size="19" fill="#94A3B8">errors block submission; warnings advise; install the Claude Code plugin to drive it agentically.</text>
+
+  <text x="100" y="476" font-size="30" font-weight="bold" fill="#0F172A">Write papers that read as precise human work, and pass review.</text>
+
+  <rect x="100" y="520" width="1080" height="2" fill="#E2E8F0"/>
+  <text x="100" y="576" font-size="22" fill="#475569">Open source, MIT. Generic and domain-agnostic: no private or project-specific material.</text>
+
+  <rect x="100" y="606" width="640" height="50" rx="8" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.5"/>
+  <text x="124" y="639" font-size="23" font-weight="bold" fill="#1D4ED8">github.com/taichi8912/paper-writing-agent</text>
+
+  <text x="1180" y="639" font-size="16" fill="#94A3B8" text-anchor="end">9 / 9</text>
+</svg>

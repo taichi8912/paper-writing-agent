@@ -33,6 +33,12 @@ paper-writing-agent 帮助你起草与修订科研论文，使行文精确、统
 目标：最大化高影响力场所的录用概率。质量层级：
 **准确 > 清晰 > 简洁 > 专业。**
 
+## 幻灯片
+
+关于动机与技术内核的九页幻灯片位于 [docs/slides/](docs/slides/)：
+[PDF](docs/slides/design-philosophy.pdf) ·
+[PPTX](docs/slides/design-philosophy.pptx)（原生、可编辑）。
+
 ## 安装
 
 ```bash

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="DejaVu Sans, Arial, sans-serif">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="14" height="720" fill="#2563EB"/>
+  <text x="100" y="92" font-size="38" font-weight="bold" fill="#0F172A">Objective and quality hierarchy</text>
+  <rect x="100" y="112" width="1080" height="2" fill="#E2E8F0"/>
+
+  <rect x="100" y="150" width="1080" height="86" rx="10" fill="#0F172A"/>
+  <text x="132" y="196" font-size="26" fill="#93C5FD" font-weight="bold">Objective</text>
+  <text x="132" y="222" font-size="20" fill="#E2E8F0">Maximize the probability of acceptance at a high-impact venue.</text>
+
+  <text x="100" y="290" font-size="22" fill="#64748B">When two goals conflict, the earlier one wins:</text>
+
+  <!-- ladder -->
+  <rect x="100" y="312" width="900" height="64" rx="8" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1.5"/>
+  <text x="130" y="352" font-size="26" font-weight="bold" fill="#065F46">1. Accuracy</text>
+  <text x="440" y="352" font-size="20" fill="#334155">every claim is factual and backed by data</text>
+
+  <rect x="100" y="388" width="820" height="64" rx="8" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1.5"/>
+  <text x="130" y="428" font-size="26" font-weight="bold" fill="#047857">2. Clarity</text>
+  <text x="440" y="428" font-size="20" fill="#334155">an expert understands it on the first read</text>
+
+  <rect x="100" y="464" width="740" height="64" rx="8" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1.5"/>
+  <text x="130" y="504" font-size="26" font-weight="bold" fill="#059669">3. Conciseness</text>
+  <text x="440" y="504" font-size="20" fill="#334155">no redundant words or expressions</text>
+
+  <rect x="100" y="540" width="660" height="64" rx="8" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1.5"/>
+  <text x="130" y="580" font-size="26" font-weight="bold" fill="#10B981">4. Professionalism</text>
+  <text x="440" y="580" font-size="20" fill="#334155">an appropriate academic register</text>
+
+  <text x="100" y="648" font-size="20" fill="#475569" font-style="italic">Accuracy is never traded for brevity; clarity is never traded for polish.</text>
+
+  <text x="100" y="692" font-size="16" fill="#94A3B8">github.com/taichi8912/paper-writing-agent</text>
+  <text x="1180" y="692" font-size="16" fill="#94A3B8" text-anchor="end">3 / 9</text>
+</svg>

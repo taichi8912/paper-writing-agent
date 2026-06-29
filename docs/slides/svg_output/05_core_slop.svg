@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="DejaVu Sans, Arial, sans-serif">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="14" height="720" fill="#2563EB"/>
+  <text x="100" y="92" font-size="38" font-weight="bold" fill="#0F172A">Technical core I: the anti-AI-slop linter</text>
+  <rect x="100" y="112" width="1080" height="2" fill="#E2E8F0"/>
+  <text x="100" y="150" font-size="21" fill="#64748B">Deterministic detection with a suggested fix for every finding.</text>
+
+  <!-- left: mechanism -->
+  <circle cx="112" cy="196" r="6" fill="#2563EB"/>
+  <text x="132" y="203" font-size="22" fill="#0F172A" font-weight="bold">Three vocabulary tiers</text>
+  <text x="132" y="232" font-size="19" fill="#475569">forbidden, replace-with-alternative, filler phrases</text>
+
+  <circle cx="112" cy="280" r="6" fill="#2563EB"/>
+  <text x="132" y="287" font-size="22" fill="#0F172A" font-weight="bold">Structural patterns</text>
+  <text x="132" y="316" font-size="19" fill="#475569">copula avoidance, participle padding,</text>
+  <text x="132" y="340" font-size="19" fill="#475569">negative parallelism, the rule of three</text>
+
+  <circle cx="112" cy="384" r="6" fill="#2563EB"/>
+  <text x="132" y="391" font-size="22" fill="#0F172A" font-weight="bold">Em dashes: zero tolerance by default</text>
+
+  <circle cx="112" cy="436" r="6" fill="#059669"/>
+  <text x="132" y="443" font-size="22" fill="#0F172A" font-weight="bold">Masking</text>
+  <text x="132" y="472" font-size="19" fill="#475569">code, math, and citations are never flagged;</text>
+  <text x="132" y="496" font-size="19" fill="#475569">offsets are preserved for exact locations</text>
+
+  <!-- right: before / after -->
+  <rect x="680" y="180" width="500" height="150" rx="10" fill="#FEF2F2" stroke="#FECACA" stroke-width="1.5"/>
+  <text x="704" y="214" font-size="20" font-weight="bold" fill="#991B1B">Before</text>
+  <text x="704" y="252" font-size="19" fill="#7F1D1D">We delve into a pivotal, novel method,</text>
+  <text x="704" y="278" font-size="19" fill="#7F1D1D">leveraging a robust pipeline to enhance</text>
+  <text x="704" y="304" font-size="19" fill="#7F1D1D">throughput.</text>
+
+  <text x="930" y="374" font-size="30" fill="#2563EB" text-anchor="middle">&#8595;</text>
+
+  <rect x="680" y="392" width="500" height="150" rx="10" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1.5"/>
+  <text x="704" y="426" font-size="20" font-weight="bold" fill="#065F46">After</text>
+  <text x="704" y="464" font-size="19" fill="#065F46">We study a new method that uses a</text>
+  <text x="704" y="490" font-size="19" fill="#065F46">reliable pipeline to increase throughput.</text>
+
+  <rect x="100" y="560" width="1080" height="80" rx="10" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.5"/>
+  <text x="124" y="596" font-size="20" fill="#1E40AF" font-weight="bold">pwa lint &lt;paths&gt;</text>
+  <text x="124" y="624" font-size="19" fill="#334155">errors fail the run; warnings advise; --format json for tooling; the rules ship in the linter.</text>
+
+  <text x="100" y="692" font-size="16" fill="#94A3B8">github.com/taichi8912/paper-writing-agent</text>
+  <text x="1180" y="692" font-size="16" fill="#94A3B8" text-anchor="end">5 / 9</text>
+</svg>

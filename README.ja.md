@@ -33,6 +33,12 @@ paper-writing-agent は、文章が精確で、統計が誠実で、引用が実
 目的：高インパクトな発表先での採択確率の最大化。品質階層：
 **正確さ > 明確さ > 簡潔さ > 専門性。**
 
+## スライド
+
+動機と技術的な肝をまとめた9枚のスライドが [docs/slides/](docs/slides/) にある：
+[PDF](docs/slides/design-philosophy.pdf) ·
+[PPTX](docs/slides/design-philosophy.pptx)（ネイティブ・編集可能）。
+
 ## インストール
 
 ```bash

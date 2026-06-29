@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="DejaVu Sans, Arial, sans-serif">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="220" fill="#0F172A"/>
+  <rect x="0" y="0" width="14" height="720" fill="#2563EB"/>
+  <text x="100" y="120" font-size="66" font-weight="bold" fill="#FFFFFF">paper-writing-agent</text>
+  <text x="102" y="172" font-size="25" fill="#93C5FD">Evidence-grounded, anti-AI-slop manuscript writing for CS &amp; software papers</text>
+
+  <text x="100" y="320" font-size="30" font-weight="bold" fill="#0F172A">Write papers that read as precise human work, and pass review.</text>
+
+  <rect x="100" y="360" width="1080" height="2" fill="#E2E8F0"/>
+
+  <text x="100" y="430" font-size="23" fill="#334155">Objective: maximize acceptance at high-impact venues.</text>
+  <text x="100" y="468" font-size="23" fill="#334155">A hybrid: a deterministic Python core plus a Claude Code plugin.</text>
+  <text x="100" y="506" font-size="23" fill="#334155">The tool lints its own prose with its own rules.</text>
+
+  <rect x="100" y="600" width="430" height="44" rx="6" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1.5"/>
+  <text x="124" y="629" font-size="21" fill="#1D4ED8" font-weight="bold">pip install paper-writing-agent</text>
+
+  <text x="1180" y="629" font-size="20" fill="#64748B" text-anchor="end">github.com/taichi8912/paper-writing-agent</text>
+</svg>

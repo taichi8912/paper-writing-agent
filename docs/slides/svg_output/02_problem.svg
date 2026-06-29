@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="DejaVu Sans, Arial, sans-serif">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="14" height="720" fill="#2563EB"/>
+  <text x="100" y="92" font-size="38" font-weight="bold" fill="#0F172A">The problem: AI-assisted writing leaves fingerprints</text>
+  <rect x="100" y="112" width="1080" height="2" fill="#E2E8F0"/>
+  <text x="100" y="150" font-size="21" fill="#64748B">Reviewers penalize the tells. Four recurring failure modes:</text>
+
+  <!-- card 1 -->
+  <rect x="100" y="180" width="520" height="180" rx="10" fill="#FEF2F2" stroke="#FECACA" stroke-width="1.5"/>
+  <rect x="100" y="180" width="7" height="180" rx="3" fill="#DC2626"/>
+  <text x="132" y="226" font-size="24" font-weight="bold" fill="#991B1B">1. AI vocabulary and structure</text>
+  <text x="132" y="262" font-size="19" fill="#334155">delve, underscore, pivotal, em dashes, the</text>
+  <text x="132" y="288" font-size="19" fill="#334155">rule of three. Read as machine-written.</text>
+
+  <!-- card 2 -->
+  <rect x="660" y="180" width="520" height="180" rx="10" fill="#FEF2F2" stroke="#FECACA" stroke-width="1.5"/>
+  <rect x="660" y="180" width="7" height="180" rx="3" fill="#DC2626"/>
+  <text x="692" y="226" font-size="24" font-weight="bold" fill="#991B1B">2. Over-claimed statistics</text>
+  <text x="692" y="262" font-size="19" fill="#334155">Bare P-values; "significant" with no test</text>
+  <text x="692" y="288" font-size="19" fill="#334155">and no explicit verdict.</text>
+
+  <!-- card 3 -->
+  <rect x="100" y="392" width="520" height="180" rx="10" fill="#FEF2F2" stroke="#FECACA" stroke-width="1.5"/>
+  <rect x="100" y="392" width="7" height="180" rx="3" fill="#DC2626"/>
+  <text x="132" y="438" font-size="24" font-weight="bold" fill="#991B1B">3. Hallucinated citations</text>
+  <text x="132" y="474" font-size="19" fill="#334155">Invented keys; references that do not say</text>
+  <text x="132" y="500" font-size="19" fill="#334155">what the sentence claims.</text>
+
+  <!-- card 4 -->
+  <rect x="660" y="392" width="520" height="180" rx="10" fill="#FEF2F2" stroke="#FECACA" stroke-width="1.5"/>
+  <rect x="660" y="392" width="7" height="180" rx="3" fill="#DC2626"/>
+  <text x="692" y="438" font-size="24" font-weight="bold" fill="#991B1B">4. Untraceable and inconsistent</text>
+  <text x="692" y="474" font-size="19" fill="#334155">Undefined terms, forward references,</text>
+  <text x="692" y="500" font-size="19" fill="#334155">numbers with no source.</text>
+
+  <text x="100" y="692" font-size="16" fill="#94A3B8">github.com/taichi8912/paper-writing-agent</text>
+  <text x="1180" y="692" font-size="16" fill="#94A3B8" text-anchor="end">2 / 9</text>
+</svg>
