@@ -1,0 +1,6 @@
+# Section-status tracker. Managed by `pwa sections`.
+# Levels: low (first draft) / middle (revised, approved) / high (near-final).
+# Promotion is never automatic; record changes with `pwa sections set`.
+generator: paper-writing-agent sections
+units: []
+history: []

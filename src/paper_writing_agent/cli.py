@@ -38,6 +38,7 @@ from .bibindex import (
 )
 from .config import CONFIG_FILENAME, PRESET_NAMES, Config, load_config, run_wizard
 from .definitions import build_registry, lint_definitions
+from .scaffold import scaffold_workspace
 from .sections import (
     LEVELS,
     discover_units,
@@ -86,6 +87,15 @@ def _cmd_init(args: argparse.Namespace) -> int:
     _echo(f"  citation style   {config.style.citation_style}")
     _echo(f"  spelling         {config.style.spelling}")
     _echo(f"  language         {config.project.operating_language}")
+
+    if not args.no_workspace:
+        created = scaffold_workspace(target_dir, config)
+        if created:
+            _echo("")
+            _echo(f"Scaffolded {len(created)} workspace file(s):")
+            for path in created:
+                _echo(f"  {os.path.relpath(path, target_dir)}")
+
     _echo("")
     _echo("Every value is safe to edit by hand. Next: run `pwa check <path>`.")
     return 0
@@ -324,6 +334,9 @@ def build_parser() -> argparse.ArgumentParser:
         "--yes", action="store_true", help="accept defaults without prompting"
     )
     p_init.add_argument("--force", action="store_true", help="overwrite an existing config")
+    p_init.add_argument(
+        "--no-workspace", action="store_true", help="write only the config; skip workspace files"
+    )
     p_init.set_defaults(func=_cmd_init)
 
     p_lint = sub.add_parser("lint", help="run the anti-AI-slop linter")
