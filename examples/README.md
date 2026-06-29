@@ -16,3 +16,19 @@ no project-specific or private material.
   ```bash
   pwa check examples/after_clean.md   # exits 0
   ```
+
+## More examples
+
+- `latex/`: a two-file LaTeX snippet (`abstract.tex`, `introduction.tex`). It
+  shows the statistical-honesty linter reading a P-value inside `$...$`, and the
+  define-once check across files in reading order. It is a clean positive
+  example:
+
+  ```bash
+  pwa check examples/latex/abstract.tex examples/latex/introduction.tex   # exits 0
+  pwa defs check examples/latex/abstract.tex examples/latex/introduction.tex
+  ```
+
+- `bibliography/`: a small `refs.bib` plus a walkthrough of
+  `pwa bib build / validate / ground`. See `bibliography/README.md`.
+
