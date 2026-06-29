@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import os
 from importlib import resources
-from importlib.abc import Traversable
 
 from .config import Config
 
@@ -31,7 +30,7 @@ def placeholders(config: Config) -> dict[str, str]:
     }
 
 
-def _iter_templates(node: Traversable, prefix: str = ""):
+def _iter_templates(node, prefix: str = ""):
     for child in node.iterdir():
         relative = f"{prefix}{child.name}"
         if child.is_dir():

@@ -1,7 +1,6 @@
 # Architecture
 
-> Status: scaffold. This document is expanded as modules land (P1-P7). The
-> authoritative specification is
+> The authoritative specification is
 > [`requirements/0001-public-release-requirements.md`](requirements/0001-public-release-requirements.md).
 
 paper-writing-agent is a **hybrid**: a deterministic Python core that any editor
@@ -11,20 +10,25 @@ can call, plus a Claude Code plugin that drives the core agentically.
 paper-writing-agent/
 ├── src/paper_writing_agent/   # deterministic core (editor-agnostic)
 │   ├── cli.py                 #   entry point: pwa init|lint|bib|stats|sections|defs|check
-│   ├── config/               #   config model + presets + init wizard
-│   ├── slop/                 #   anti-AI-slop linter
-│   ├── bibindex/             #   bibliography context indexer + schema validator
-│   ├── stats/                #   statistics store + statistical-honesty linter
+│   ├── config/               #   config model + presets + init wizard + TOML I/O
+│   ├── slop/                 #   anti-AI-slop linter (rules, masking, engine, report)
+│   ├── bibindex/             #   BibTeX parser, context index, schema validator, grounding
+│   ├── stats/                #   statistical-honesty linter
 │   ├── sections/             #   completion tracker (low/middle/high) + exemplars
-│   └── definitions/          #   symbol/abbreviation registry + no-forward-reference linter
+│   ├── definitions/          #   abbreviation registry + no-forward-reference linter
+│   ├── scaffold.py           #   workspace scaffolder used by `pwa init`
+│   └── templates/workspace/  #   manuscript-workspace templates (shipped as package data)
 ├── plugin/                    # Claude Code plugin (agentic layer)
+│   ├── .claude-plugin/plugin.json
 │   ├── skills/  commands/  agents/  knowledge/
-│   └── plugin.json
-├── templates/                 # manuscript-workspace scaffolding emitted by `pwa init`
+│   └── README.md
 ├── examples/                  # synthetic CS/software worked examples
-├── tests/                     # pytest + golden-file tests
+├── tests/                     # pytest tests for every module
 └── docs/                      # README (EN/ZH/JA), design philosophy, this file, requirements
 ```
+
+The report format is shared: the `slop`, `stats`, and `definitions` linters all
+emit the same `Finding` type, so `pwa check` and the JSON output are uniform.
 
 ## Two layers, one core
 
