@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.tox/
+.cache/
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Tool output (generated workspaces, indexes)
+*.log
+*.tmp
+*.temp
+/tmp/
+
+# Secrets (never commit)
+.env
+.env.local
+*.pem
+credentials.json
+
+# LaTeX build artifacts (when running on a manuscript workspace)
+*.aux
+*.bcf
+*.fdb_latexmk
+*.fls
+*.out
+*.run.xml
+*.synctex.gz

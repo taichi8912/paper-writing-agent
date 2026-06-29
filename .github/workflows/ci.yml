@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: lint + test (py${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Lint (ruff)
+        run: ruff check src tests
+
+      - name: Format check (black)
+        run: black --check src tests
+
+      - name: Type check (mypy)
+        run: mypy src
+        continue-on-error: true
+
+      - name: Test
+        run: pytest --cov=paper_writing_agent --cov-report=term-missing
+
+  dogfood:
+    name: self-dogfood (anti-slop linter on own docs)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e "."
+      # The project applies its own rules to its own prose (pillar 8).
+      # Warn-only during alpha; remove --exit-zero to make it a hard gate.
+      - run: python -m paper_writing_agent.cli lint docs/ README.md --exit-zero

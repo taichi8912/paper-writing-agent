@@ -1,0 +1,38 @@
+paper-writing-agent
+Copyright (c) 2026 paper-writing-agent contributors
+
+This product includes software developed under the MIT License (see LICENSE).
+
+-------------------------------------------------------------------------------
+Third-party content and attributions
+-------------------------------------------------------------------------------
+
+1. Anti-AI-writing pattern catalogue (src/paper_writing_agent/slop, plugin
+   humanizer skill)
+
+   The catalogue of AI-writing patterns is adapted from:
+     "Wikipedia:Signs of AI writing"
+     https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+     maintained by WikiProject AI Cleanup.
+   Wikipedia text is available under the Creative Commons
+   Attribution-ShareAlike License (CC BY-SA). The pattern descriptions in
+   this project are a derivative summary; the original illustrative examples
+   were replaced with computer-science and software-engineering examples
+   authored for this project.
+
+2. Optional integrations
+
+   This project can drive external Claude Code skills (for example, a deep
+   literature-search skill and a peer-review skill) when the user installs
+   them separately. Those skills are governed by their own licenses and are
+   not redistributed here. The adapters in plugin/skills only describe how to
+   invoke such tools safely; they contain no third-party code.
+
+-------------------------------------------------------------------------------
+Privacy statement
+-------------------------------------------------------------------------------
+
+This repository is a generic, domain-agnostic tool. It intentionally contains
+no project-specific, unpublished, or author-private material. All worked
+examples are synthetic and drawn from the computer-science and software
+domains.
