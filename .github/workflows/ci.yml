@@ -50,4 +50,4 @@ jobs:
           python-version: "3.12"
       - run: pip install -e "."
       # The project applies its own rules to its own prose (pillar 8). Hard gate.
-      - run: python -m paper_writing_agent.cli lint docs/ README.md CONTRIBUTING.md
+      - run: python -m paper_writing_agent.cli lint docs/ README.md CONTRIBUTING.md plugin/

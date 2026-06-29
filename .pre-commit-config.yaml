@@ -27,5 +27,5 @@ repos:
         pass_filenames: false
         # Lint the project's own prose with its own rules (pillar 8). This is a
         # hard gate: the project must pass the standard it enforces on others.
-        args: ["docs/", "README.md", "CONTRIBUTING.md"]
+        args: ["docs/", "README.md", "CONTRIBUTING.md", "plugin/"]
         files: \.(md)$
