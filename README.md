@@ -9,10 +9,10 @@
 > Status: alpha scaffold. The full README, install instructions, and worked
 > examples are completed in the final documentation pass. For now, see:
 >
-> - [Design philosophy](docs/DESIGN_PHILOSOPHY.md) — the contract behind every feature.
-> - [Architecture](docs/ARCHITECTURE.md) — how the hybrid core and plugin fit together.
-> - [Requirements](docs/requirements/0001-public-release-requirements.md) — the authoritative specification.
-> - [Contributing](CONTRIBUTING.md) — how we work, and how the project holds itself to its own standard.
+> - [Design philosophy](docs/DESIGN_PHILOSOPHY.md): the contract behind every feature.
+> - [Architecture](docs/ARCHITECTURE.md): how the hybrid core and plugin fit together.
+> - [Requirements](docs/requirements/0001-public-release-requirements.md): the authoritative specification.
+> - [Contributing](CONTRIBUTING.md): how we work, and how the project holds itself to its own standard.
 
 ## What it does
 
@@ -22,7 +22,7 @@ text carries no AI fingerprints. It is a **hybrid**: a deterministic Python core
 (`pip install paper-writing-agent`, command `pwa`) plus a Claude Code plugin that
 drives the core agentically.
 
-Sensible defaults out of the box; everything overridable via `pwa init`.
+Sensible defaults out of the box; everything overridable through `pwa init`.
 
 ## License
 

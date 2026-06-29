@@ -1,5 +1,5 @@
 ---
-title: "paper-writing-agent — Public Release Requirements"
+title: "paper-writing-agent: Public Release Requirements"
 doc_id: REQ-0001
 status: approved
 created: 2026-06-29
@@ -9,7 +9,7 @@ related_notes:
 source_prompt: "Obsidian Vault/NewPrompt/論文執筆エージェントの外部リポジトリ公開.md (Request.1)"
 ---
 
-# paper-writing-agent — Public Release Requirements (REQ-0001)
+# paper-writing-agent: Public Release Requirements (REQ-0001)
 
 This is the authoritative specification for the public, open-source release of a
 scientific paper-writing agent, generalized from a private agent built while
@@ -194,7 +194,7 @@ authority; no fabricated citations.
 - NFR-2: Unit and golden-file tests for every linter; CI on 3.11 and 3.12.
 - NFR-3: Deterministic linter output (stable ordering) for reproducible CI.
 - NFR-4: The project dogfoods its own anti-slop linter in pre-commit and CI.
-- NFR-5: No network calls in the core; external tools are opt-in via the plugin.
+- NFR-5: No network calls in the core; external tools are opt-in through the plugin.
 
 ## 8. Development base structure (process as product)
 

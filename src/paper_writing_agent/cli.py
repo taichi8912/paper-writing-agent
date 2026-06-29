@@ -23,7 +23,8 @@ import sys
 from collections.abc import Sequence
 
 from . import __version__
-from .config import CONFIG_FILENAME, PRESET_NAMES, run_wizard
+from .config import CONFIG_FILENAME, PRESET_NAMES, Config, load_config, run_wizard
+from .slop import format_json, format_text, has_errors, lint_paths
 
 _NOT_YET = "this subcommand is scaffolded; its implementation lands in a later phase"
 
@@ -69,11 +70,18 @@ def _cmd_init(args: argparse.Namespace) -> int:
 # stubs (implemented in later phases)
 # --------------------------------------------------------------------------- #
 def _cmd_lint(args: argparse.Namespace) -> int:
-    # The anti-slop linter arrives in P2. Until then this is a no-op so the
-    # dogfooding pre-commit/CI hooks are wired end-to-end; --exit-zero is already
-    # accepted and will gate the exit status once findings exist.
-    _warn(f"lint: {_NOT_YET} (P2).")
-    return 0
+    config = Config.load(args.config) if args.config else load_config()
+    findings = lint_paths(args.paths, config=config)
+
+    if args.format == "json":
+        _echo(format_json(findings))
+    else:
+        _echo(format_text(findings))
+
+    if args.exit_zero:
+        return 0
+    # By default only error-severity findings fail the run; warnings are advisory.
+    return 1 if has_errors(findings) else 0
 
 
 def _cmd_stub(name: str, phase: str) -> int:
@@ -106,7 +114,7 @@ def build_parser() -> argparse.ArgumentParser:
     p_init.add_argument("--force", action="store_true", help="overwrite an existing config")
     p_init.set_defaults(func=_cmd_init)
 
-    p_lint = sub.add_parser("lint", help="run the anti-AI-slop linter (P2)")
+    p_lint = sub.add_parser("lint", help="run the anti-AI-slop linter")
     p_lint.add_argument("paths", nargs="*", default=["."], help="files or directories")
     p_lint.add_argument("--exit-zero", action="store_true", help="always exit 0 (warn-only)")
     p_lint.add_argument("--format", choices=("text", "json"), default="text")

@@ -13,10 +13,10 @@ venue.** Everything else is subordinate to this objective.
 
 When two goals conflict, the earlier one wins:
 
-1. **Accuracy** — every claim is factual and backed by data.
-2. **Clarity** — an expert understands it on the first read.
-3. **Conciseness** — no redundant words or expressions.
-4. **Professionalism** — an appropriate academic register throughout.
+1. **Accuracy**: every claim is factual and backed by data.
+2. **Clarity**: an expert understands it on the first read.
+3. **Conciseness**: no redundant words or expressions.
+4. **Professionalism**: an appropriate academic register throughout.
 
 Accuracy is never traded for brevity; clarity is never traded for polish.
 
@@ -52,9 +52,9 @@ Accuracy is never traded for brevity; clarity is never traded for polish.
    justified. A reader can reconstruct how every number was produced.
 
 7. **Configurable, not rigid.** The original agent was tuned to one author and
-   one venue. The public tool exposes every such choice — target venue,
+   one venue. The public tool exposes every such choice (target venue,
    citation style, spelling variant, P-value notation, section structure,
-   strictness, operating language — as a friendly default that the user
+   strictness, operating language) as a friendly default that the user
    overrides. Sensible out of the box; never a straitjacket.
 
 8. **Dogfooding.** The project applies its own rules to its own prose. The
