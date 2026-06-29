@@ -3,7 +3,7 @@
 > 一个以证据为本、杜绝 AI 腔的科研论文写作智能体，面向计算机科学与软件工程论文，
 > 目标是最大化高影响力期刊或会议的录用概率。
 
-**语言：** [English](../README.md) · 中文（本文） · [日本語](README.ja.md)
+**语言：** [English](README.md) · 简体中文 · [日本語](README.ja.md)
 
 ## 这是什么
 
@@ -19,7 +19,7 @@ paper-writing-agent 帮助你起草与修订科研论文，使行文精确、统
 
 ## 设计理念（为什么这样做）
 
-完整说明见 [DESIGN_PHILOSOPHY.md](DESIGN_PHILOSOPHY.md)。简要而言，八根支柱：
+完整说明见 [DESIGN_PHILOSOPHY.md](docs/DESIGN_PHILOSOPHY.md)。简要而言，八根支柱：
 
 1. **证据为本。** 每个论断都可追溯到来源：数值、图的溯源、引用或定义。
 2. **杜绝 AI 腔。** AI 行文有指纹；检查器会发现它们并给出精确的学术替换。
@@ -41,7 +41,7 @@ pip install paper-writing-agent        # 提供 `pwa` 命令
 pip install -e ".[dev]"
 ```
 
-Claude Code 插件请见 [plugin/README.md](../plugin/README.md)。
+Claude Code 插件请见 [plugin/README.md](plugin/README.md)。
 
 ## 快速开始
 
@@ -90,17 +90,17 @@ pwa defs check my-paper/abstract.tex my-paper/introduction.tex
 
 Python 内核纯粹、确定且经过单元测试，拥有规则与检查，且不依赖任何编辑器；Claude Code
 插件提供工作流、提示词与模板，并调用内核执行每一项检查。见
-[ARCHITECTURE.md](ARCHITECTURE.md)。
+[ARCHITECTURE.md](docs/ARCHITECTURE.md)。
 
 ## 隐私
 
 这是一个通用、与领域无关的工具，不含任何项目专有、未发表或作者私有的材料。所有示例
-均为合成内容，取自计算机科学与软件领域。见 [NOTICE](../NOTICE)。
+均为合成内容，取自计算机科学与软件领域。见 [NOTICE](NOTICE)。
 
 ## 参与贡献
 
-见 [CONTRIBUTING.md](../CONTRIBUTING.md)。本项目以其要求于论文的同等纪律来约束自身的开发。
+见 [CONTRIBUTING.md](CONTRIBUTING.md)。本项目以其要求于论文的同等纪律来约束自身的开发。
 
 ## 许可证
 
-MIT（见 [LICENSE](../LICENSE)）。改编内容的署名见 [NOTICE](../NOTICE)。
+MIT（见 [LICENSE](LICENSE)）。改编内容的署名见 [NOTICE](NOTICE)。

@@ -4,7 +4,7 @@
 > computer-science and software-engineering papers, engineered to maximize
 > acceptance at high-impact venues.
 
-**Languages:** English (this file) · [中文](docs/README.zh.md) · [日本語](docs/README.ja.md)
+**Languages:** English · [简体中文](README.zh-CN.md) · [日本語](README.ja.md)
 
 ## What it is
 

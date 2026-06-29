@@ -3,7 +3,7 @@
 > 証拠に接地し、AI 臭を排した科学論文執筆エージェント。計算機科学・ソフトウェア
 > 工学の論文を対象に、高インパクトな発表先での採択確率を最大化することを目的とする。
 
-**言語：** [English](../README.md) · [中文](README.zh.md) · 日本語（本文）
+**言語：** [English](README.md) · [简体中文](README.zh-CN.md) · 日本語
 
 ## これは何か
 
@@ -19,7 +19,7 @@ paper-writing-agent は、文章が精確で、統計が誠実で、引用が実
 
 ## 設計思想（なぜこの形か）
 
-完全版は [DESIGN_PHILOSOPHY.md](DESIGN_PHILOSOPHY.md) を参照。要点は8本の柱：
+完全版は [DESIGN_PHILOSOPHY.md](docs/DESIGN_PHILOSOPHY.md) を参照。要点は8本の柱：
 
 1. **証拠接地。** すべての主張は出典（数値・図の来歴・引用・定義）に解決する。
 2. **AI 臭の排除。** AI 文章には指紋がある。検査器がそれを検出し、精確な学術表現を提案する。
@@ -41,7 +41,7 @@ pip install paper-writing-agent        # `pwa` コマンドを提供
 pip install -e ".[dev]"
 ```
 
-Claude Code プラグインは [plugin/README.md](../plugin/README.md) を参照。
+Claude Code プラグインは [plugin/README.md](plugin/README.md) を参照。
 
 ## クイックスタート
 
@@ -91,19 +91,19 @@ pwa defs check my-paper/abstract.tex my-paper/introduction.tex
 
 Python コアは純粋・決定論的で単体テスト済み、規則と検査を所有し、エディタに非依存。
 Claude Code プラグインはワークフロー・プロンプト・テンプレートを提供し、各検査では
-コアを呼び出す。[ARCHITECTURE.md](ARCHITECTURE.md) を参照。
+コアを呼び出す。[ARCHITECTURE.md](docs/ARCHITECTURE.md) を参照。
 
 ## プライバシー
 
 本ツールは汎用かつ領域非依存であり、プロジェクト固有・未公開・著者私有の素材を
 一切含まない。すべての実例は合成であり、計算機科学・ソフトウェア領域から作成した。
-[NOTICE](../NOTICE) を参照。
+[NOTICE](NOTICE) を参照。
 
 ## 貢献
 
-[CONTRIBUTING.md](../CONTRIBUTING.md) を参照。本プロジェクトは、原稿に課す規律と
+[CONTRIBUTING.md](CONTRIBUTING.md) を参照。本プロジェクトは、原稿に課す規律と
 同じ規律で自らの開発を律する。
 
 ## ライセンス
 
-MIT（[LICENSE](../LICENSE) を参照）。改変したコンテンツの帰属は [NOTICE](../NOTICE) に記す。
+MIT（[LICENSE](LICENSE) を参照）。改変したコンテンツの帰属は [NOTICE](NOTICE) に記す。
