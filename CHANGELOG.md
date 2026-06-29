@@ -29,4 +29,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   development base structure that dogfoods the anti-slop linter in pre-commit and
   CI (single-source-of-truth layout, reproducible tooling, semantic versioning).
 
-[Unreleased]: https://github.com/OWNER/paper-writing-agent/commits/main
+[Unreleased]: https://github.com/taichi8912/paper-writing-agent/commits/main

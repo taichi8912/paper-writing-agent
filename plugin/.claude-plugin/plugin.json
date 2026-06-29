@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Evidence-grounded, anti-AI-slop manuscript writing for computer-science and software-engineering papers. Drives the paper-writing-agent core (linters, bibliography index, trackers) and ships a knowledge base of journal-agnostic writing templates.",
   "author": { "name": "paper-writing-agent contributors" },
-  "homepage": "https://github.com/OWNER/paper-writing-agent",
+  "homepage": "https://github.com/taichi8912/paper-writing-agent",
   "license": "MIT",
   "keywords": ["academic-writing", "latex", "linter", "bibliography", "anti-ai-slop"]
 }

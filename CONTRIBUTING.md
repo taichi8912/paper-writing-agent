@@ -37,7 +37,7 @@ They apply to maintainers, contributors, and the agent equally.
 ## Development setup
 
 ```bash
-git clone https://github.com/OWNER/paper-writing-agent
+git clone https://github.com/taichi8912/paper-writing-agent
 cd paper-writing-agent
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
