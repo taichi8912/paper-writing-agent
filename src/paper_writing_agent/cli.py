@@ -21,6 +21,9 @@ import argparse
 import os
 import sys
 from collections.abc import Sequence
+from datetime import date as _date
+
+import yaml
 
 from . import __version__
 from .bibindex import (
@@ -34,10 +37,22 @@ from .bibindex import (
     validate_index,
 )
 from .config import CONFIG_FILENAME, PRESET_NAMES, Config, load_config, run_wizard
-from .slop import format_json, format_text, has_errors, lint_paths
+from .definitions import build_registry, lint_definitions
+from .sections import (
+    LEVELS,
+    discover_units,
+    exemplars,
+    load_tracker,
+    new_tracker,
+    save_tracker,
+    set_level,
+    summarize,
+    sync_tracker,
+)
+from .slop import default_extensions, format_json, format_text, has_errors, lint_paths
+from .stats import lint_stats
 
-_NOT_YET = "this subcommand is scaffolded; its implementation lands in a later phase"
-
+_TRACKER_DEFAULT = "section_status.yaml"
 
 def _echo(message: str = "") -> None:
     print(message)
@@ -92,11 +107,6 @@ def _cmd_lint(args: argparse.Namespace) -> int:
         return 0
     # By default only error-severity findings fail the run; warnings are advisory.
     return 1 if has_errors(findings) else 0
-
-
-def _cmd_stub(name: str, phase: str) -> int:
-    _warn(f"{name}: {_NOT_YET} ({phase}).")
-    return 0
 
 
 # --------------------------------------------------------------------------- #
@@ -169,6 +179,129 @@ def _cmd_bib_ground(args: argparse.Namespace) -> int:
 
 
 # --------------------------------------------------------------------------- #
+# stats
+# --------------------------------------------------------------------------- #
+def _gather_files(paths: Sequence[str]) -> list[str]:
+    extensions = default_extensions()
+    found: list[str] = []
+    for entry in paths:
+        if os.path.isdir(entry):
+            for root, _dirs, files in os.walk(entry):
+                found.extend(
+                    os.path.join(root, name)
+                    for name in sorted(files)
+                    if name.lower().endswith(extensions)
+                )
+        elif os.path.isfile(entry):
+            found.append(entry)
+    return found
+
+
+def _cmd_stats(args: argparse.Namespace) -> int:
+    config = Config.load(args.config) if args.config else load_config()
+    findings = []
+    for path in _gather_files(args.paths):
+        with open(path, encoding="utf-8") as handle:
+            findings.extend(lint_stats(handle.read(), path=path, config=config))
+
+    _echo(format_json(findings) if args.format == "json" else format_text(findings))
+    if args.exit_zero:
+        return 0
+    return 1 if has_errors(findings) else 0
+
+
+# --------------------------------------------------------------------------- #
+# sections
+# --------------------------------------------------------------------------- #
+def _load_or_new_tracker(path: str) -> dict:
+    return load_tracker(path) if os.path.isfile(path) else new_tracker()
+
+
+def _cmd_sections_status(args: argparse.Namespace) -> int:
+    tracker = _load_or_new_tracker(args.tracker)
+    counts = summarize(tracker)
+    _echo(f"Units: {counts['total']} (high {counts['high']}, middle {counts['middle']}, low {counts['low']})")
+    for unit in tracker["units"]:
+        present = "" if unit.get("present", True) else "  [missing]"
+        _echo(f"  {unit.get('level', 'low'):6} {unit['name']}{present}")
+    return 0
+
+
+def _cmd_sections_sync(args: argparse.Namespace) -> int:
+    tracker = _load_or_new_tracker(args.tracker)
+    discovered = discover_units(args.root)
+    sync_tracker(tracker, discovered)
+    save_tracker(args.tracker, tracker)
+    _echo(f"Synced {len(discovered)} unit(s) into {args.tracker}.")
+    return _cmd_sections_status(args)
+
+
+def _cmd_sections_set(args: argparse.Namespace) -> int:
+    tracker = _load_or_new_tracker(args.tracker)
+    when = args.date or _date.today().isoformat()
+    set_level(tracker, args.unit, args.level, reason=args.reason, date=when)
+    save_tracker(args.tracker, tracker)
+    _echo(f"Set {args.unit} -> {args.level} ({when}).")
+    return 0
+
+
+def _cmd_sections_exemplars(args: argparse.Namespace) -> int:
+    tracker = _load_or_new_tracker(args.tracker)
+    picks = exemplars(tracker, target=args.unit)
+    if not picks:
+        _echo("No high/middle exemplars available yet.")
+        return 0
+    _echo(f"Exemplars to imitate when drafting {args.unit!r} (strongest first):")
+    for pick in picks:
+        _echo(f"  {pick['level']:6} {pick['name']}  {pick['path']}")
+    return 0
+
+
+# --------------------------------------------------------------------------- #
+# defs
+# --------------------------------------------------------------------------- #
+def _cmd_defs_check(args: argparse.Namespace) -> int:
+    files = _gather_files(args.files)
+    findings = lint_definitions(files)
+    _echo(format_json(findings) if args.format == "json" else format_text(findings))
+    if args.exit_zero:
+        return 0
+    return 1 if has_errors(findings) else 0
+
+
+def _cmd_defs_build(args: argparse.Namespace) -> int:
+    registry = build_registry(_gather_files(args.files))
+    text = yaml.safe_dump(registry, sort_keys=False, allow_unicode=True, width=100)
+    if args.output:
+        with open(args.output, "w", encoding="utf-8") as handle:
+            handle.write(text)
+        _echo(f"Wrote {args.output} ({len(registry['abbreviations'])} abbreviations).")
+    else:
+        _echo(text)
+    return 0
+
+
+# --------------------------------------------------------------------------- #
+# check (aggregate)
+# --------------------------------------------------------------------------- #
+def _cmd_check(args: argparse.Namespace) -> int:
+    config = Config.load(args.config) if args.config else load_config()
+    files = _gather_files(args.paths)
+
+    findings = list(lint_paths(args.paths, config=config))
+    for path in files:
+        with open(path, encoding="utf-8") as handle:
+            findings.extend(lint_stats(handle.read(), path=path, config=config))
+    findings.extend(lint_definitions(files))
+    findings.sort(key=lambda f: (f.path, f.line, f.col, f.rule_id))
+
+    _echo(format_json(findings) if args.format == "json" else format_text(findings))
+    if args.exit_zero:
+        return 0
+    return 1 if has_errors(findings) else 0
+
+
+# --------------------------------------------------------------------------- #
 # parser
 # --------------------------------------------------------------------------- #
 def build_parser() -> argparse.ArgumentParser:
@@ -226,15 +359,60 @@ def build_parser() -> argparse.ArgumentParser:
     b_ground.set_defaults(func=_cmd_bib_ground)
     p_bib.set_defaults(func=lambda a: _require_subcommand(p_bib))
 
-    for name, phase, helptext in (
-        ("stats", "P4", "run the statistical-honesty linter"),
-        ("sections", "P4", "show / update the section-status tracker"),
-        ("defs", "P4", "check the symbol/abbreviation registry"),
-        ("check", "P4", "run all configured linters"),
-    ):
-        sp = sub.add_parser(name, help=f"{helptext} ({phase})")
-        sp.add_argument("paths", nargs="*", default=["."], help="files or directories")
-        sp.set_defaults(func=lambda a, n=name, ph=phase: _cmd_stub(n, ph))
+    p_stats = sub.add_parser("stats", help="run the statistical-honesty linter")
+    p_stats.add_argument("paths", nargs="*", default=["."], help="files or directories")
+    p_stats.add_argument("--exit-zero", action="store_true", help="always exit 0 (warn-only)")
+    p_stats.add_argument("--format", choices=("text", "json"), default="text")
+    p_stats.add_argument("--config", default=None, help="path to a config file")
+    p_stats.set_defaults(func=_cmd_stats)
+
+    p_sections = sub.add_parser("sections", help="show / update the section-status tracker")
+    sec_sub = p_sections.add_subparsers(dest="sections_command", metavar="<action>")
+
+    s_status = sec_sub.add_parser("status", help="show the completion table")
+    s_status.add_argument("--tracker", default=_TRACKER_DEFAULT, help="tracker YAML path")
+    s_status.set_defaults(func=_cmd_sections_status)
+
+    s_sync = sec_sub.add_parser("sync", help="discover units from a root and update the tracker")
+    s_sync.add_argument("root", help="LaTeX root (\\input/\\subfile) or a Markdown file")
+    s_sync.add_argument("--tracker", default=_TRACKER_DEFAULT, help="tracker YAML path")
+    s_sync.set_defaults(func=_cmd_sections_sync)
+
+    s_set = sec_sub.add_parser("set", help="set a unit's completion level (explicit)")
+    s_set.add_argument("unit", help="unit name")
+    s_set.add_argument("level", choices=LEVELS, help="completion level")
+    s_set.add_argument("--reason", default="", help="why the level changed")
+    s_set.add_argument("--date", default="", help="ISO date (default: today)")
+    s_set.add_argument("--tracker", default=_TRACKER_DEFAULT, help="tracker YAML path")
+    s_set.set_defaults(func=_cmd_sections_set)
+
+    s_ex = sec_sub.add_parser("exemplars", help="list high/middle units to imitate")
+    s_ex.add_argument("unit", help="the unit you are about to draft")
+    s_ex.add_argument("--tracker", default=_TRACKER_DEFAULT, help="tracker YAML path")
+    s_ex.set_defaults(func=_cmd_sections_exemplars)
+    p_sections.set_defaults(func=lambda a: _require_subcommand(p_sections))
+
+    p_defs = sub.add_parser("defs", help="check the symbol/abbreviation registry")
+    defs_sub = p_defs.add_subparsers(dest="defs_command", metavar="<action>")
+
+    d_check = defs_sub.add_parser("check", help="flag forward references and redefinitions")
+    d_check.add_argument("files", nargs="+", help="files in reading order")
+    d_check.add_argument("--exit-zero", action="store_true", help="always exit 0 (warn-only)")
+    d_check.add_argument("--format", choices=("text", "json"), default="text")
+    d_check.set_defaults(func=_cmd_defs_check)
+
+    d_build = defs_sub.add_parser("build", help="emit an abbreviation registry")
+    d_build.add_argument("files", nargs="+", help="files in reading order")
+    d_build.add_argument("--output", default=None, help="output YAML path (default: stdout)")
+    d_build.set_defaults(func=_cmd_defs_build)
+    p_defs.set_defaults(func=lambda a: _require_subcommand(p_defs))
+
+    p_check = sub.add_parser("check", help="run all linters (slop + stats + defs)")
+    p_check.add_argument("paths", nargs="*", default=["."], help="files or directories")
+    p_check.add_argument("--exit-zero", action="store_true", help="always exit 0 (warn-only)")
+    p_check.add_argument("--format", choices=("text", "json"), default="text")
+    p_check.add_argument("--config", default=None, help="path to a config file")
+    p_check.set_defaults(func=_cmd_check)
 
     return parser
 
