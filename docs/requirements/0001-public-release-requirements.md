@@ -217,9 +217,9 @@ The repository layout and process embody the philosophy:
 - AC-4: `pwa check` consolidates linter output with a correct exit status.
 - AC-5: The Claude Code plugin loads (valid `plugin.json`, skills, commands,
   agents) and its adapters are READ-ONLY and user-triggered.
-- AC-6: README exists at the repository root in English (`README.md`), 简体中文
-  (`README.zh-CN.md`), and 日本語 (`README.ja.md`), cross-linked by a language
-  navigation bar at the top of each.
+- AC-6: A single root `README.md` carries English, 简体中文, and 日本語 sections,
+  cross-linked by an anchor-based language navigation bar at the top, and each
+  section includes an author-responsibility disclaimer.
 - AC-7: A privacy scan finds none of the forbidden private tokens (PRIV-1/2/3).
 - AC-8: The project's own docs pass `pwa lint` (dogfooding).
 
