@@ -31,12 +31,14 @@ classifiers = [
   "Topic :: Text Processing :: Markup :: LaTeX",
 ]
 dependencies = [
-  "typer>=0.12",
   "rich>=13.7",
   "pyyaml>=6.0",
   "jsonschema>=4.21",
-  "tomli-w>=1.0",
 ]
+
+# The deterministic core depends only on small, pure-Python libraries. TOML is
+# read with the standard-library tomllib (Python 3.11+) and written with a
+# dependency-free serializer in config/toml_io.py, so no TOML package is needed.
 
 [project.optional-dependencies]
 dev = [
@@ -55,8 +57,8 @@ Documentation = "https://github.com/OWNER/paper-writing-agent/tree/main/docs"
 Issues = "https://github.com/OWNER/paper-writing-agent/issues"
 
 [project.scripts]
-paper-writing-agent = "paper_writing_agent.cli:app"
-pwa = "paper_writing_agent.cli:app"
+paper-writing-agent = "paper_writing_agent.cli:main"
+pwa = "paper_writing_agent.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/paper_writing_agent"]
