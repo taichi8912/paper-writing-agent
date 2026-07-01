@@ -25,6 +25,24 @@ problem it solves, and why it matters.
 - Section structure: <methods-supplementary / methods-extended / imrad>
 - Figure references: <full / abbreviated>
 
+## Experiment sources (point the agent here)
+
+The agent writes from your artifacts, not from memory. Record where each kind of
+evidence lives, so every method, number, and figure resolves to the code and logs
+that produced it. Absolute paths or paths relative to this workspace both work;
+write "none" for anything that does not apply.
+
+- Results and outputs: <run outputs, checkpoints, metrics>
+- Experiment source code: <the analysis or training code>
+- Run scripts and job files: <what launched each run>
+- Experiment configuration: <run configs, hyperparameters>
+- Logs: <stdout, stderr, training logs>
+- Environment recipe: <requirements.txt / environment.yml / Dockerfile / lockfile>
+- Virtual environment: <interpreter or env path, for exact versions>
+- Statistics store: `stats/` (full-precision numbers; see `provenance_map.md`)
+
+The more of this the agent can read, the less the paper loses in translation.
+
 ## Project vocabulary
 
 - Preferred terms and their definitions (define once, use bare).
