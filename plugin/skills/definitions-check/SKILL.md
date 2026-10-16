@@ -31,3 +31,17 @@ Keep terminology consistent and free of forward references.
 
 Keep `DEFINITIONS.template.md` as the single source of truth for what each symbol
 and abbreviation means.
+
+## Detection limits and manual review
+
+The deterministic checker recognizes explicit "Long Form (ABBR)" definitions.
+It checks abbreviations found in those definitions; it does not discover every
+undefined label or symbol. In particular, a label that is never defined and a
+single-letter model label can pass without a finding. Definitions written in
+other forms may also be missed. A clean report does not establish complete
+terminology coverage.
+
+After running the checker, review model names, experimental conditions, tables,
+and captions in reading order using the nomenclature rules in
+[STYLE_GUIDE.md](../../knowledge/STYLE_GUIDE.md#6-nomenclature-and-spelling).
+This manual pass is required before reporting the terminology review complete.

@@ -209,7 +209,7 @@ def build_rules(
                     id=f"tier1.custom.{word.lower()}",
                     category="tier1",
                     severity="error",
-                    pattern=_word(re.escape(word)),
+                    pattern=_phrase(word),
                     message="Project-defined forbidden word.",
                     suggestion=None,
                     tier=1,

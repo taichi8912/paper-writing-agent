@@ -90,7 +90,7 @@ def lint_text(
 ) -> list[Finding]:
     config = config or load_config()
     rules = rules if rules is not None else _rules_for(config)
-    allow = {word.lower() for word in config.slop.allow}
+    allow = {" ".join(word.lower().split()) for word in config.slop.allow}
 
     file_type = detect_file_type(path)
     masked = mask_regions(text, file_type)
@@ -101,7 +101,7 @@ def lint_text(
         for match in rule.pattern.finditer(masked):
             start, end = match.span()
             snippet = text[start:end]
-            if snippet.strip().lower() in allow:
+            if " ".join(snippet.lower().split()) in allow:
                 continue
             if len(snippet) > _SNIPPET_MAX:
                 snippet = snippet[:_SNIPPET_MAX].rstrip() + "..."

@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 
+import pytest
+
 from paper_writing_agent.config import Config, get_preset
 from paper_writing_agent.config.model import SlopConfig
 from paper_writing_agent.slop import (
@@ -90,6 +92,50 @@ def test_extra_forbidden_words():
     cfg = Config(slop=SlopConfig(extra_forbidden=["quux"]))
     findings = lint_text("The quux module is ready.", path="a.md", config=cfg)
     assert any(f.rule_id == "tier1.custom.quux" for f in findings)
+
+
+@pytest.mark.parametrize("separator", [" ", "  ", "\t", "\n"])
+def test_extra_forbidden_phrase_handles_whitespace_and_preserves_location(separator):
+    cfg = Config(slop=SlopConfig(extra_forbidden=["internal label"]))
+    phrase = f"Internal{separator}label"
+    findings = lint_text(f"Introduction.\nThe {phrase} is used.", path="a.md", config=cfg)
+    assert len(findings) == 1
+    finding = findings[0]
+    assert finding.rule_id == "tier1.custom.internal label"
+    assert finding.matched == phrase
+    assert (finding.line, finding.col) == (2, 5)
+
+
+def test_extra_forbidden_phrase_preserves_literal_characters_and_boundaries():
+    cfg = Config(slop=SlopConfig(extra_forbidden=["a+b label"]))
+    findings = lint_text(
+        "Use a+b label. Keep aaab label, xa+b label, and a+b labels.",
+        path="a.md",
+        config=cfg,
+    )
+    assert [finding.matched for finding in findings] == ["a+b label"]
+
+
+def test_extra_forbidden_phrase_allow_list_survives_line_wrapping():
+    cfg = Config(slop=SlopConfig(extra_forbidden=["internal label"], allow=[" Internal  Label "]))
+    assert lint_text("The internal\nlabel is quoted.", path="a.md", config=cfg) == []
+
+
+@pytest.mark.parametrize(
+    ("path", "text"),
+    [
+        ("a.md", "`internal label`\n```\ninternal\nlabel\n```\n$internal label$"),
+        (
+            "a.tex",
+            "% internal label\n"
+            "\\begin{verbatim}\ninternal\nlabel\n\\end{verbatim}\n"
+            "$internal label$ \\cite{internal label}",
+        ),
+    ],
+)
+def test_extra_forbidden_phrase_ignores_nonprose(path, text):
+    cfg = Config(slop=SlopConfig(extra_forbidden=["internal label"]))
+    assert lint_text(text, path=path, config=cfg) == []
 
 
 def test_lenient_does_not_flag_tier2():

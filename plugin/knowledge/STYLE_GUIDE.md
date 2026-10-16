@@ -76,13 +76,23 @@ Quality hierarchy: **Accuracy > Clarity > Conciseness > Professionalism.**
 
 - **Define once, then use bare.** Introduce an abbreviation at first use as
   "Long Form (ABBR)"; afterwards use the abbreviation alone. Do not redefine.
-  `pwa defs check` enforces this in reading order.
+  `pwa defs check` checks recognized definitions in reading order; see the
+  definitions-check skill for its detection limits and the manual review step.
 - **No undefined symbols.** Define every symbol at first use; keep a registry
   (see `DEFINITIONS.template.md`).
 - **Spelling [configurable]** `style.spelling`: `US` or `UK`. Be consistent
   (`optimization`/`optimisation`, `behavior`/`behaviour`).
 - **No implementation identifiers in prose.** Write "the attention layer", not
   `MultiHeadAttention`; name the concept, not the class.
+- **Name models and conditions for the reader.** Introduce each with a descriptive
+  scientific name before using a short label. Distinguish a model, its training
+  condition, and the device used to run it. Keep internal run identifiers in
+  provenance records unless the manuscript needs them for reproducibility.
+- **State the scientific boundary.** Describe the actual data, comparison, or
+  limitation instead of using workflow phrases such as "evidence scope". Review
+  prose, tables, and captions in reading order. Preserve mathematical notation,
+  necessary code examples, and attributed quotations during this review; a
+  terminology rule is not a reason to alter their meaning.
 
 ## 7. Language quality (anti-AI-slop)
 
